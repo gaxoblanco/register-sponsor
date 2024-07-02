@@ -35,22 +35,25 @@ for i in range(0, len(data), batch_size):
 
         # Realiza la búsqueda en Google
         search_term = f"{name} linkein - jobs"
-        results = google_search.search(search_term, num=2)
+        results = google_search.search(search_term, num=1)
 
-        # print(results[0]['link'] + '/jobs')  # type: ignore
+        print(results[0]['link'] + '/jobs')  # type: ignore
+        # print(results[0]['snippet'])
         # print('---------------->>---')
         if results:
             first_result = results[0]
             # title = first_result.get('title', '')
-            link = first_result.get('link' + '/jobs', '')
-            snippet = first_result.get('snippet', '')
+            link = first_result.get('link', '') + '/jobs'
+            # valido que la url tenga /company/ para que sea la url de linkedin que espero
+            if '/company/' not in link:
+                continue
 
             # Procesa el primer resultado
-            url, positions = process_result.process_first_result(snippet)
+            url = link
 
             # Actualiza los datos en el diccionario
-            entry['linkedin_url'] = url
-            entry['positions'] = positions
+            entry['linkedin_url'] = link
+            # entry['positions'] = positions
 
     # Guarda los datos actualizados en un archivo JSON
     try:
@@ -61,3 +64,5 @@ for i in range(0, len(data), batch_size):
         exit(1)
 
     print(f"Procesado el lote de {i} a {i + batch_size}")
+
+print("Actualización completa.")

@@ -24,7 +24,7 @@ def search(search_term, **kwargs):
 
 
 # Ejemplo de uso
-# results = search("Nvidia linkein - jobs", num=2)
+# results = search("3Dimerce B.V. linkein /jobs", num=1)
 
 # if results:
 #     for result in results:
