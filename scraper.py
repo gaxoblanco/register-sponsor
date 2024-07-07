@@ -47,7 +47,7 @@ if response.status_code == 200:
     json_data = json.dumps(data, indent=4)
 
     # Define el nombre del archivo JSON
-    output_file = 'sponsors.json'
+    output_file = 'sponsorsI.json'
 
     # Guarda los datos en un archivo JSON
     with open(output_file, 'w') as file:

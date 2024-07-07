@@ -25,6 +25,10 @@ batch_size = 10
 for i in range(0, len(data), batch_size):
     batch = data[i:i + batch_size]
 
+    # valido que la entrada aun no tenga la url de linkedin
+    # compresion de listas
+    batch = [entry for entry in batch if 'linkedin_url' not in entry]
+
     # Por cada entrada en el lote hago la busqueda en Google
     for entry in batch:
         # Valido si ya tiene la URL de LinkedIn si la tiene no ejecuto la busqueda
@@ -48,8 +52,9 @@ for i in range(0, len(data), batch_size):
             if '/company/' not in link:
                 continue
 
-            # Procesa el primer resultado
-            url = link
+            # busco si la cadena de texto contiene //job, si es asi lo convierto a /jobs
+            if '//job' in link:
+                link = link.replace('//job', '/jobs')
 
             # Actualiza los datos en el diccionario
             entry['linkedin_url'] = link

@@ -1,9 +1,15 @@
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# Reemplaza con tus propias credenciales
-API_KEY = "AIzaSyDgygjZC4w1Mik2Lj4w6X4ir6fxaSD0Q9s"
-SEARCH_ENGINE_ID = "d32d95372b4d24e6a"
+from dotenv import load_dotenv
+import os
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()
+
+# Ahora puedes acceder a las variables de entorno usando os.getenv
+API_KEY = os.getenv("API_KEY")
+SEARCH_ENGINE_ID = os.getenv("SEARCH_ENGINE_ID")
 
 
 def search(search_term, **kwargs):
