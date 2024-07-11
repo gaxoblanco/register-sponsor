@@ -42,8 +42,6 @@ for i in range(0, len(data), batch_size):
         results = google_search.search(search_term, num=1)
 
         print(results[0]['link'] + '/jobs')  # type: ignore
-        # print(results[0]['snippet'])
-        # print('---------------->>---')
         if results:
             first_result = results[0]
             # title = first_result.get('title', '')
