@@ -161,7 +161,7 @@
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">${item.industry}</p>
-                        <a href="${item.company_url}" class="btn btn-primary margin: 6px 0;" target="_blank">Company Info</a>
+                        <a href="https://${item.company_url}" class="btn btn-primary margin: 6px 0;" target="_blank">Company Info</a>
                         <a href="${item.linkedin_url}" class="btn btn-secondary" target="_blank">LinkedIn</a>
                         <button class="btn btn-${item.check ? 'success' : 'warning'} check-btn" data-id="${item.id}">
                             ${item.check ? 'Checked' : 'Check'}
