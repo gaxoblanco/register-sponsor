@@ -1,7 +1,16 @@
 import json
 import os
+import shutil
 import process_result
 import google_search
+
+# Función para crear una copia de seguridad
+
+
+def backup_file(file_path):
+    backup_path = file_path + ".bak"
+    shutil.copyfile(file_path, backup_path)
+
 
 # Define el nombre del archivo JSON de entrada
 input_file = os.path.abspath('sponsors.json')
@@ -41,7 +50,7 @@ for i in range(0, len(data), batch_size):
         search_term = f"{name} linkein - jobs"
         results = google_search.search(search_term, num=1)
 
-        print(results[0]['link'] + '/jobs')  # type: ignore
+        # print(results[0]['link'] + '/jobs')  # type: ignore
         if results:
             first_result = results[0]
             # title = first_result.get('title', '')
@@ -58,10 +67,14 @@ for i in range(0, len(data), batch_size):
             entry['linkedin_url'] = link
             # entry['positions'] = positions
 
-    # Guarda los datos actualizados en un archivo JSON
+# Guarda los datos actualizados en un archivo temporal
+    temp_file = input_file + '.tmp'
     try:
-        with open(input_file, 'w') as file:
+        with open(temp_file, 'w') as file:
             json.dump(data, file, indent=4)
+
+        # Si la escritura fue exitosa, reemplaza el archivo original
+        os.replace(temp_file, input_file)
     except Exception as e:
         print(f"Error guardando el archivo JSON: {e}")
         exit(1)
