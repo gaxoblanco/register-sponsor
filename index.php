@@ -77,7 +77,7 @@
 
     <?php
     // Leer el archivo JSON
-    $json_data = file_get_contents('sponsors_updated.json');
+    $json_data = file_get_contents('sponsors.json');
     $sponsors = json_decode($json_data, true);
 
     // Leer la cookie
@@ -133,6 +133,15 @@
                 }
                 setCookie('sponsors', cookieData, 30);
             };
+
+            // valido que data no sea null o undefined
+            if (data) {
+                // Actualizar la cookie con los datos iniciales
+                const cookieData = getCookie('sponsors') || [];
+                if (cookieData.length === 0) {
+                    setCookie('sponsors', data, 30);
+                }
+            }
 
             const renderCards = (data, page = 1) => {
                 const container = document.getElementById('card-container');
@@ -221,8 +230,15 @@
             };
 
             const filterData = () => {
-                const searchText = document.getElementById('search').value.toLowerCase();
-                filteredData = data.filter(item => item.industry_en.toLowerCase().includes(searchText));
+                const searchText = search.value.trim().toLowerCase();
+                if (searchText === '') {
+                    filteredData = data;
+                } else {
+                    filteredData = data.filter(item => {
+                        const industryEn = item.industry_en ? item.industry_en.toLowerCase() : '';
+                        return industryEn.includes(searchText);
+                    });
+                }
                 currentPage = 1;
                 renderCards(filteredData, currentPage);
                 updatePagination(Math.ceil(filteredData.length / itemsPerPage));
