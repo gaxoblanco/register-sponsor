@@ -11,7 +11,7 @@ def update_company_url(entry):
         # Extrae la parte de la URL después de 'https://logo.clearbit.com/'
         extracted_url = logo_url[len(clearbit_prefix):]
         # Actualiza el campo company_url con la URL extraída
-        entry['company_url'] = extracted_url
+        entry['company_url'] = 'https://' + extracted_url
         return True
     return False
 

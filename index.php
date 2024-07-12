@@ -7,6 +7,21 @@
     <title>Company Information</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <style>
+        .header-content {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
         .container-flex {
             display: flex;
             width: 90%;
@@ -63,7 +78,12 @@
 </head>
 
 <body>
-
+    <header class="container">
+        <div class="header-content">
+            <h1>Visa Sponsoring Companies in the Netherlands</h1>
+            <p>Welcome to our comprehensive listing of companies in the Netherlands that sponsor visas. Here, you will find a detailed list of all companies that support visa sponsorships, along with a filter option based on the industry sector they belong to.</p>
+        </div>
+    </header>
     <div class="container mt-4">
         <div class="container-flex">
             <input type="text" id="search" class="form-control mb-4" placeholder="Search by industry">
@@ -134,15 +154,6 @@
                 setCookie('sponsors', cookieData, 30);
             };
 
-            // valido que data no sea null o undefined
-            if (data) {
-                // Actualizar la cookie con los datos iniciales
-                const cookieData = getCookie('sponsors') || [];
-                if (cookieData.length === 0) {
-                    setCookie('sponsors', data, 30);
-                }
-            }
-
             const renderCards = (data, page = 1) => {
                 const container = document.getElementById('card-container');
                 container.innerHTML = '';
@@ -161,10 +172,10 @@
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">${item.industry}</p>
-                        <a href="https://${item.company_url}" class="btn btn-primary margin: 6px 0;" target="_blank">Company Info</a>
+                        <a href="${item.company_url}" class="btn btn-primary margin: 6px 0;" target="_blank">Company Info</a>
                         <a href="${item.linkedin_url}" class="btn btn-secondary" target="_blank">LinkedIn</a>
                         <button class="btn btn-${item.check ? 'success' : 'warning'} check-btn" data-id="${item.id}">
-                            ${item.check ? 'Checked' : 'Check'}
+                            ${item.check ? 'Reviewed' : 'Review'}
                         </button>
                     </div>
                 `;
