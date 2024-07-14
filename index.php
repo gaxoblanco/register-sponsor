@@ -163,17 +163,19 @@
                 const items = data.slice(start, end);
 
                 items.forEach(item => {
+                    // Verificar si la URL del logo contiene la cadena específica
+                    const logoUrl = item.logo_url.includes('https://index-edge.creditsafe.com/img') ? 'pending.png' : item.logo_url;
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `
                     <figure class="text-center">
-                        <img src="${item.logo_url}" class="card-img-top" alt="${item.name}">
+                        <img src="${logoUrl}" class="card-img-top" alt="${item.name}">
                     </figure>
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text">${item.industry}</p>
                         <a href="${item.company_url}" class="btn btn-primary margin: 6px 0;" target="_blank">Company Info</a>
-                        <a href="${item.linkedin_url}" class="btn btn-secondary" target="_blank">LinkedIn</a>
+                        <a href="${item.linkedin_url}" class="btn btn-secondary ${item.linkedin_url === '-' || item.linkedin_url === undefined ? 'disabled' : ''}" target="_blank">LinkedIn</a>
                         <button class="btn btn-${item.check ? 'success' : 'warning'} check-btn" data-id="${item.id}">
                             ${item.check ? 'Reviewed' : 'Review'}
                         </button>
@@ -189,7 +191,7 @@
                         updateCookieData(id, checked);
                         button.classList.toggle('btn-success', checked);
                         button.classList.toggle('btn-warning', !checked);
-                        button.textContent = checked ? 'Checked' : 'Check';
+                        button.textContent = checked ? 'Reviewed' : 'Review';
                     });
                 });
             };
