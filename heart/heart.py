@@ -44,6 +44,10 @@ for i in range(0, len(data), batch_size):
         if 'linkedin_url' in entry:
             continue
 
+        # Valido que en el campo industry_en tenga la cadena de texto software, si no lo tiene no ejecuto la busqueda
+        if 'software' not in entry.get('industry_en', '').lower():
+            continue
+
         name = entry.get('name', '')
 
         # Realiza la búsqueda en Google
@@ -66,6 +70,9 @@ for i in range(0, len(data), batch_size):
             # Actualiza los datos en el diccionario
             entry['linkedin_url'] = link
             # entry['positions'] = positions
+
+            # Valido que el campo logo_url tenga la cade de texto: https://index-edge.creditsafe.com, si es asi la reemplazo con el valor de entry['cse_image']
+
 
 # Guarda los datos actualizados en un archivo temporal
     temp_file = input_file + '.tmp'
