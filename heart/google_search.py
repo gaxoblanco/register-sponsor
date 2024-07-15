@@ -30,24 +30,14 @@ def search(search_term, **kwargs):
 
 
 # Ejemplo de uso
-results = search("3Dimerce B.V. linkein /jobs", num=1)
+# results = search("3Dimerce B.V. linkein /jobs", num=1)
 
-if results:
-    for result in results:
-        # Imprime el título del resultado
-        print(result.get('title', 'No title available'))
-
-        # Imprime el enlace del resultado
-        print(result.get('link', 'No link available'))
-
-        # Imprime la imagen, si está disponible
-        # if 'cse_image' in result:
-        #     print(result['cse_image'])
-        # else:
-        #     print('No image available')
-
-        # Imprime el snippet, si está disponible
-        print(result.get('snippet', 'No snippet available'))
-        print()
-else:
-    print("No se pudieron obtener resultados. Verifica tus credenciales y configuración.")
+# if results:
+#     for result in results:
+#         print(result['title'])
+#         print(result['link'])
+#         print(result['pagemap']['cse_image'][0]['src'])
+#         print(result.get('snippet', 'No snippet available'))
+#         print()
+# else:
+#     print("No se pudieron obtener resultados. Verifica tus credenciales y configuración.")

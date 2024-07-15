@@ -69,9 +69,11 @@ for i in range(0, len(data), batch_size):
 
             # Actualiza los datos en el diccionario
             entry['linkedin_url'] = link
-            # entry['positions'] = positions
 
-            # Valido que el campo logo_url tenga la cade de texto: https://index-edge.creditsafe.com, si es asi la reemplazo con el valor de entry['cse_image']
+            # Compruebo si el valor de 'logo_url' contiene la cadena 'https://index-edge.creditsafe.com'
+            if 'https://index-edge.creditsafe.com' in entry['logo_url']:
+                # Si contiene la cadena, reemplazo 'logo_url' con el valor del primer elemento de 'cse_image'
+                entry['logo_url'] = entry['pagemap']['cse_image'][0]['src']
 
 
 # Guarda los datos actualizados en un archivo temporal
